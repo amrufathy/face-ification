@@ -65,9 +65,10 @@ def get_projection_matrices(data_matrix, alphas):
     else:
         from pca.pca import pca
         projection_matrices = []
-        with open(file_path, 'wb') as f:
-            for alpha in alphas:
-                projection_matrices.append(pca(data_matrix, alpha))
+        for alpha in alphas:
+            projection_matrices.append(pca(data_matrix, alpha))
 
+        with open(file_path, 'wb') as f:
             pickle.dump(obj=projection_matrices, file=f, protocol=pickle.HIGHEST_PROTOCOL)
+
         return projection_matrices

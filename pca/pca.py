@@ -62,6 +62,7 @@ def pca(data_matrix, alpha):
 
     for idx, val in enumerate(eig_vals_cum_sums):
         if (val / total_eigen_values_sum) < alpha:
+            # noinspection PySimplifyBooleanCheck
             if new_bases == []:
                 new_bases = eigen_pairs[idx][1]
             new_bases = np.hstack((new_bases, eigen_pairs[idx][1]))

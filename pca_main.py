@@ -16,6 +16,7 @@ projection_matrices = get_projection_matrices(data_matrix, alphas)
 
 for projection_matrix in projection_matrices:
     # projection_matrix = projection_matrices[2]
+    print(projection_matrix.shape)
 
     new_train_matrix = train_matrix.dot(projection_matrix)
     new_test_matrix = test_matrix.dot(projection_matrix)
