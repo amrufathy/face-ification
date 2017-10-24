@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 
+from lib.data_handling import *
 from metrics import get_accuracy
-from pca.data_handling import *
 
 all_data, train_data, test_data = generate_balanced_data_matrix()
 data_matrix, labels = all_data[:, :-1], all_data[:, -1]
@@ -15,9 +15,6 @@ accuracies = []
 projection_matrices = get_projection_matrices(data_matrix, alphas)
 
 for projection_matrix in projection_matrices:
-    # projection_matrix = projection_matrices[2]
-    print(projection_matrix.shape)
-
     new_train_matrix = train_matrix.dot(projection_matrix)
     new_test_matrix = test_matrix.dot(projection_matrix)
 
