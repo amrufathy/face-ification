@@ -4,7 +4,7 @@ import numpy as np
 from scipy.ndimage import imread
 from sklearn.model_selection import train_test_split
 
-from cache import cache
+from lib.cache import cache
 
 
 def generate_random_data_matrix(path='orl_faces', test_ratio=0.3):

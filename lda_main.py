@@ -2,7 +2,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 from lib.data_handling import *
 from lib.lda import lda
-from metrics import get_accuracy
+from lib.metrics import get_accuracy
 
 classes_matrices = generate_subjects_matrices()
 

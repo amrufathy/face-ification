@@ -1,6 +1,6 @@
 import numpy as np
 
-from cache import cache
+from lib.cache import cache
 
 
 def get_eigen_values_vectors(covariance_matrix, alpha):

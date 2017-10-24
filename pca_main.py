@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 
 from lib.data_handling import *
-from metrics import get_accuracy
+from lib.metrics import get_accuracy
 
 all_data, train_data, test_data = generate_balanced_data_matrix()
 data_matrix, labels = all_data[:, :-1], all_data[:, -1]

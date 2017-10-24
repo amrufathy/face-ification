@@ -1,6 +1,6 @@
 import numpy as np
 
-from cache import cache
+from lib.cache import cache
 
 base_path = 'pickles/lda/'
 
