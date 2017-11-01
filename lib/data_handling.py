@@ -1,10 +1,9 @@
 import os
 
 import numpy as np
+from cachpy import cachpy
 from scipy.ndimage import imread
 from sklearn.model_selection import train_test_split
-
-from lib.cache import cache
 
 
 def generate_random_data_matrix(path='orl_faces', test_ratio=0.3):
@@ -75,7 +74,7 @@ def generate_subjects_matrices(path='orl_faces'):
     return classes_matrices
 
 
-@cache('pickles/pca/projection_matrices.pickle')
+@cachpy('pickles/pca/projection_matrices.pickle')
 def get_projection_matrices(data_matrix, alphas):
     from lib.pca import pca
     projection_matrices = []

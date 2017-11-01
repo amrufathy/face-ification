@@ -1,5 +1,6 @@
 def get_accuracy(labels, predictions):
-    labels = list(labels.flatten().tolist()[0])
+    import numpy as np
+    labels, predictions = np.ravel(labels), np.ravel(predictions)
 
     # noinspection PyTypeChecker
     difference = list(predictions == labels)

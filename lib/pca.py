@@ -1,12 +1,12 @@
 import numpy as np
 
-from lib.cache import cache
+from cachpy import cachpy
 
 
 def get_eigen_values_vectors(covariance_matrix, alpha):
     path = 'pca/pickles/eigen_values_vectors_' + str(alpha) + '.pickle'
 
-    @cache(path)
+    @cachpy(path)
     def get_eigen_values_vectors_for_alpha(covariance_matrix):
         return np.linalg.eigh(covariance_matrix)
 

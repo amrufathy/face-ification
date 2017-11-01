@@ -1,11 +1,11 @@
 import numpy as np
 
-from lib.cache import cache
+from cachpy import cachpy
 
 base_path = 'pickles/lda/'
 
 
-@cache(base_path + 'sb_matrix.pickle')
+@cachpy(base_path + 'sb_matrix.pickle')
 def calculate_sb_matrix(mean_vectors, overall_mean, classes_matrices):
     # noinspection PyPep8Naming
     S_b = 0
@@ -17,7 +17,7 @@ def calculate_sb_matrix(mean_vectors, overall_mean, classes_matrices):
     return np.asmatrix(S_b)
 
 
-@cache(base_path + 's_matrix.pickle')
+@cachpy(base_path + 's_matrix.pickle')
 def calculate_s_matrix(centered_class_matrices):
     # noinspection PyPep8Naming
     S = 0
@@ -28,12 +28,12 @@ def calculate_s_matrix(centered_class_matrices):
 
 
 # noinspection PyPep8Naming
-@cache(base_path + 's_inv_sb_matrix.pickle')
+@cachpy(base_path + 's_inv_sb_matrix.pickle')
 def calculate_s_inv_sb_matrix(S, S_b):
     return np.linalg.inv(S).dot(S_b)
 
 
-@cache(base_path + 'eigen_values_vectors.pickle')
+@cachpy(base_path + 'eigen_values_vectors.pickle')
 def calculate_eigen_values_vectors(in_matrix):
     return np.linalg.eigh(in_matrix)
 
@@ -41,7 +41,7 @@ def calculate_eigen_values_vectors(in_matrix):
 # noinspection PyPep8Naming
 def lda(data_matrix, classes_matrices):
     mean_vectors = [np.mean(class_matrix[:, :-1], axis=0).T for class_matrix in classes_matrices]
-    overall_mean = np.mean(data_matrix[:, :-1], axis=0).T
+    overall_mean = np.mean(data_matrix, axis=0).T
     print('calculated means')
 
     S_b = calculate_sb_matrix(mean_vectors, overall_mean, classes_matrices)

@@ -27,6 +27,7 @@ for projection_matrix in projection_matrices:
     accuracies.append(accuracy)
 
 plt.plot(alphas, accuracies)
+plt.scatter(alphas, accuracies)
 plt.xlabel('Alpha')
 plt.ylabel('Accuracy')
 plt.show()
