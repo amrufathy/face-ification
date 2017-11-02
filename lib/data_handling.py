@@ -39,7 +39,6 @@ def generate_balanced_data_matrix(path='orl_faces'):
             image_src = os.path.join(path, os.path.join(subject, image_src))
             image = imread(image_src, mode='L').flatten()
 
-            # print(idx, image_src)
             # noinspection PyTypeChecker
             image = np.append(image, int(subject[1:]))
             data_matrix.append(image)
@@ -82,3 +81,36 @@ def get_projection_matrices(data_matrix, alphas):
         projection_matrices.append(pca(data_matrix, alpha))
 
     return projection_matrices
+
+
+def generate_face_non_face_data_matrix(test_ratio=0.3):
+    from glob import glob
+    import random
+
+    non_face_files = glob('non-face/*-x.pgm')
+    non_face_files = random.sample(non_face_files, 400)
+
+    face_files = glob('orl_faces/*/*.pgm')
+
+    faces_matrix, non_faces_matrix = [], []
+
+    for image_src in face_files:
+        image = imread(image_src, mode='L').flatten()
+        # noinspection PyTypeChecker
+        image = np.append(image, 0)
+
+        faces_matrix.append(image)
+
+    for image_src in non_face_files:
+        image = imread(image_src, mode='L').flatten()
+        # noinspection PyTypeChecker
+        image = np.append(image, 1)
+
+        non_faces_matrix.append(image)
+
+    all_data = faces_matrix + non_faces_matrix
+    all_data = np.asmatrix(all_data)
+    train_data, test_data = train_test_split(all_data, test_size=test_ratio)
+    train_data, test_data = np.asmatrix(train_data), np.asmatrix(test_data)
+
+    return all_data, train_data, test_data

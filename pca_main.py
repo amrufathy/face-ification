@@ -4,7 +4,11 @@ from sklearn.neighbors import KNeighborsClassifier
 from lib.data_handling import *
 from lib.metrics import get_accuracy
 
-all_data, train_data, test_data = generate_balanced_data_matrix()
+os.environ['MKL_DYNAMIC'] = 'false'
+
+test_split = 0.3
+
+all_data, train_data, test_data = generate_random_data_matrix(test_ratio=test_split)
 data_matrix, labels = all_data[:, :-1], all_data[:, -1]
 train_matrix, train_labels = train_data[:, :-1], train_data[:, -1]
 test_matrix, test_labels = test_data[:, :-1], test_data[:, -1]
@@ -28,6 +32,7 @@ for projection_matrix in projection_matrices:
 
 plt.plot(alphas, accuracies)
 plt.scatter(alphas, accuracies)
+plt.title(('Train ({}%) - Test ({}%)'.format(((1 - test_split) * 100), (test_split * 100))))
 plt.xlabel('Alpha')
 plt.ylabel('Accuracy')
 plt.show()
