@@ -64,22 +64,8 @@ def lda(data_matrix, classes_matrices):
     del S_inv_Sb
     print('calculated eigen values and eigen vectors')
 
-    # Get eigen-(value, vector) pairs, sorted in desc order of values
-    eigen_pairs = [(np.abs(eigen_values[i]), eigen_vectors[:, i]) for i in range(len(eigen_values))]
-    eigen_pairs.sort()
-    eigen_pairs.reverse()
-    eigen_pairs = eigen_pairs[0:38]
-    print('calculated pairs')
-    del eigen_values, eigen_vectors
+    idx = eigen_values.argsort()[::-1]
+    eigen_vectors = eigen_vectors[:, idx]
+    print('sorted eigen values and vectors')
 
-    new_bases = []
-    for value, vector in eigen_pairs:
-        # noinspection PySimplifyBooleanCheck
-        if new_bases == []:
-            new_bases = vector
-
-        new_bases = np.hstack((new_bases, vector))
-
-    new_bases = np.asmatrix(new_bases)
-
-    return new_bases
+    return np.asmatrix(eigen_vectors[:, :38])

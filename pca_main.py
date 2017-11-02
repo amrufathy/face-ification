@@ -18,8 +18,8 @@ for projection_matrix in projection_matrices:
     new_train_matrix = train_matrix.dot(projection_matrix)
     new_test_matrix = test_matrix.dot(projection_matrix)
 
-    knn = KNeighborsClassifier(n_neighbors=1, n_jobs=1)
-    knn.fit(new_train_matrix, train_labels)
+    knn = KNeighborsClassifier(n_neighbors=1)
+    knn.fit(new_train_matrix, np.ravel(train_labels))
     predictions = knn.predict(new_test_matrix)
 
     accuracy = get_accuracy(test_labels, predictions)
